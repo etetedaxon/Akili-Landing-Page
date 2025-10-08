@@ -7,9 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --primary:#FF7A00;   /* orange */
-      --accent:#00A86B;    /* green */
-      --bg:#0f1620;        /* dark charcoal */
+      --primary:#FF7A00;
+      --accent:#00A86B;
+      --bg:#0f1620;
       --card:#111921;
       --muted:#cbd5e1;
       --glass: rgba(255,255,255,0.04);
@@ -28,32 +28,20 @@
     h1{font-size:44px;margin:14px 0;color:#fff;line-height:1.02}
     p.lead{color:#d0d7de;max-width:640px;font-size:16px}
     .cta-row{margin-top:20px;display:flex;gap:12px}
-    .btn{padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:700}
+    .btn{padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:700;transition:all 0.3s ease}
     .btn-primary{background:linear-gradient(90deg,var(--primary),#ff9d3d);color:#081018;box-shadow:0 10px 30px rgba(255,122,0,0.14)}
+    .btn-primary:hover{transform:translateY(-3px);background:linear-gradient(90deg,#ff9d3d,var(--primary))}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    /* card */
     .card{background:var(--card);padding:18px;border-radius:16px;box-shadow:0 8px 36px rgba(2,6,23,0.6)}
-    /* ticket form */
-    .ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .field{display:flex;flex-direction:column;gap:6px}
-    input,select{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02);color:var(--muted)}
-    .map-iframe{border-radius:12px;border:0;height:320px;width:100%}
     section{margin-top:48px}
-    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:16px;border-radius:12px}
-    .muted-sm{color:#9aa6b2;font-size:14px}
-    /* tracking */
-    .tracker{display:flex;gap:12px;align-items:center}
-    .progress{height:10px;background:rgba(255,255,255,0.05);border-radius:999px;flex:1;overflow:hidden}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary));width:30%}
-    /* resale modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:80}
-    .modal-card{width:520px;background:linear-gradient(180deg,#0b1417, #071015);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .row{display:flex;gap:12px;align-items:center}
     footer{padding:28px;text-align:center;color:#9aa6b2;margin-top:36px}
-    /* responsive */
-    @media(max-width:920px){.hero{grid-template-columns:1fr;}.features-grid{grid-template-columns:1fr 1fr}.container{padding:120px 16px}}
-    @media(max-width:520px){.features-grid{grid-template-columns:1fr}.ticket-grid{grid-template-columns:1fr}.logo{width:46px;height:46px}}
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+    .price-card{background:var(--card);padding:28px;border-radius:20px;text-align:center;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s ease}
+    .price-card:hover{transform:translateY(-5px);border-color:var(--primary)}
+    .price-title{color:#fff;font-size:20px;font-weight:700;margin-bottom:8px}
+    .price-amount{font-size:32px;color:var(--primary);font-weight:800;margin-bottom:12px}
+    .price-desc{color:#9aa6b2;font-size:14px;margin-bottom:20px}
+    @media(max-width:920px){.hero{grid-template-columns:1fr}.container{padding:120px 16px}}
   </style>
 </head>
 <body>
@@ -74,293 +62,77 @@
   </header>
 
   <main class="container" id="home">
+    <!-- Hero Section -->
     <section class="hero">
       <div>
         <div class="eyebrow">Built for Africa</div>
         <h1>Smart Travel for Africa's Movers</h1>
-        <p class="lead">Akili makes intercity travel predictable and fair. Book from home, track in real time, and resell unused tickets securely — all in one beautiful app designed for African journeys.</p>
+        <p class="lead">Akili makes intercity travel predictable and fair. Book from home, track in real time, and resell unused tickets securely — all in one app.</p>
         <div class="cta-row">
-          <button class="btn btn-primary" onclick="document.getElementById('tickets').scrollIntoView({behavior:'smooth'})">Find a Bus Now</button>
-          <button class="btn btn-ghost" onclick="alert('Thanks — for partnerships, email info@akili.com')">Partner with Akili</button>
-        </div>
-
-        <div style="margin-top:26px;display:flex;gap:12px">
-          <div class="card" style="min-width:240px;flex:1">
-            <div style="font-weight:700;color:#fff">Why Akili</div>
-            <div class="muted-sm" style="margin-top:10px">
-              Cut waste. Reduce uncertainty. Give travelers options. Designed to recover lost seats and give people control when plans change.
-            </div>
-          </div>
-
-          <div class="card" style="min-width:240px;flex:1">
-            <div style="font-weight:700;color:#fff">Join early</div>
-            <div class="muted-sm" style="margin-top:10px">Join the waitlist and we'll notify you when we launch pilots in your city.</div>
-            <div style="margin-top:12px"><input id="waitEmail" placeholder="Your email" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)"><button style="margin-top:8px;width:100%;padding:10px;border-radius:8px;background:var(--accent);border:0;font-weight:700;color:#041014;cursor:pointer" onclick="joinWait()">Get Early Access</button></div>
-          </div>
+          <button class="btn btn-primary">Find a Bus Now</button>
+          <button class="btn btn-ghost">Partner with Akili</button>
         </div>
       </div>
-
       <div>
-        <div class="card" style="padding:18px">
-          <div style="font-weight:700;color:#fff;margin-bottom:8px">Quick Demo</div>
-          <div class="muted-sm">Search a route, simulate tracking and test the resale flow — all live on this page.</div>
-
-          <div style="margin-top:14px" class="ticket-grid">
-            <div class="field">
-              <label class="muted-sm">From</label>
-              <input id="from" value="Lagos" />
-            </div>
-            <div class="field">
-              <label class="muted-sm">To</label>
-              <input id="to" value="Abuja" />
-            </div>
-            <div class="field" style="grid-column: 1 / -1">
-              <label class="muted-sm">Date</label>
-              <input id="date" type="date" />
-            </div>
-            <div style="grid-column:1/-1">
-              <button class="btn btn-primary" style="width:100%" onclick="searchBuses()">Search Buses</button>
-            </div>
-          </div>
-
-          <div id="searchResults" style="margin-top:14px;display:none">
-            <div style="margin-top:12px">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div><strong style="font-size:14px">God Is Good Motors</strong><div class="muted-sm">Lagos → Abuja • 7 seats left</div></div>
-                <div style="text-align:right">
-                  <div style="font-weight:800;color:#fff">₦7,500</div>
-                  <div class="muted-sm">3h 20m • Luxury Coach</div>
-                </div>
-              </div>
-
-              <div style="margin-top:12px" class="row tracker">
-                <div style="min-width:140px">
-                  <div class="muted-sm">Status</div>
-                  <div style="font-weight:800;color:#fff" id="busStatus">Arriving in 12 mins</div>
-                </div>
-                <div class="progress"><i id="progressBar" style="width:10%"></i></div>
-                <div style="min-width:120px;text-align:right"><button class="btn btn-ghost" onclick="openResale()">Resell</button></div>
-              </div>
-
-              <div style="margin-top:14px;display:flex;gap:10px">
-                <button class="btn btn-primary" onclick="bookNow()">Book Seat</button>
-                <button class="btn" onclick="alert('Simulated payment: card/mobile money — in real product we integrate gateways')">Pay Options</button>
-                
-              </div>
-            </div>
-          </div>
-
+        <div class="card">
+          <div style="font-weight:700;color:#fff">Quick Demo</div>
+          <p style="color:#9aa6b2;font-size:14px;margin-top:8px">Search a route and simulate a trip demo.</p>
         </div>
       </div>
     </section>
 
-    <!-- Tickets - Map & Info -->
-    <section id="tickets" class="card" style="margin-top:30px">
-      <h2 style="color:#fff;margin:0 0 12px">Interactive Map & Live Tracking</h2>
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:12px;align-items:start">
-        <div>
-          <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973445.418370568!2d2.7!3d9.082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d79b2c4f1bb%3A0x3f64b9b9fffa98f!2sNigeria!5e0!3m2!1sen!2sng!4v1702048945678!5m2!1sen!2sng"></iframe>
+    <!-- Pricing / Tickets Section -->
+    <section id="tickets" style="margin-top:80px;text-align:center">
+      <h2 style="color:#fff;font-size:32px;margin-bottom:10px;">Tickets & Pricing</h2>
+      <p style="color:#9aa6b2;font-size:15px;max-width:600px;margin:0 auto 40px;">
+        Simple, transparent pricing for every traveler. No hidden fees, no last-minute stress.
+      </p>
+
+      <div class="pricing">
+        <div class="price-card">
+          <div class="price-title">Basic</div>
+          <div class="price-amount">₦3,000</div>
+          <p class="price-desc">Ideal for short-distance routes and flexible travelers.</p>
+          <button class="btn btn-primary">Buy Ticket</button>
         </div>
-        <div>
-          <div style="background:var(--glass);padding:14px;border-radius:12px">
-            <div style="font-weight:700;color:#fff">Live Route — Lagos → Abuja</div>
-            <div style="margin-top:8px" class="muted-sm">Tracking: God Is Good Motors (GIG-021)</div>
-            <div style="margin-top:12px" class="row tracker">
-              <div style="min-width:120px"><div class="muted-sm">ETA</div><div id="eta" style="font-weight:800;color:#fff">12 mins</div></div>
-              <div class="progress"><i id="progressBar2" style="width:32%"></i></div>
-            </div>
 
-            <div style="margin-top:12px">
-              <div class="muted-sm">Live Update</div>
-              <div id="liveFeed" style="margin-top:6px;color:#dfe7e9">Bus is on route and making its way from Lagos Park. Next stop: Bus Terminal — Departure soon.</div>
-            </div>
+        <div class="price-card" style="border:2px solid var(--primary);">
+          <div class="price-title">Premium</div>
+          <div class="price-amount">₦5,500</div>
+          <p class="price-desc">Comfort seating, quick boarding, and resell flexibility.</p>
+          <button class="btn btn-primary">Buy Ticket</button>
+        </div>
 
-           <section id="tickets" style="padding: 80px 20px; background-color: #f9f9f9; text-align: center;">
-  <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #222;">Tickets</h2>
-  <p style="font-size: 1.1em; color: #555; max-width: 600px; margin: 0 auto 40px;">
-    Join us for an unforgettable experience. Reserve your spot and be part of the movement shaping the future.
-  </p>
-  <button 
-    style="
-      background-color: #007bff; 
-      color: white; 
-      border: none; 
-      padding: 14px 40px; 
-      border-radius: 8px; 
-      font-size: 1.1em; 
-      cursor: pointer; 
-      transition: all 0.3s ease;
-    "
-    onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='translateY(-3px)';"
-    onmouseout="this.style.backgroundColor='#007bff'; this.style.transform='translateY(0)';"
-  >
-    Buy Ticket
-  </button>
-</section>
-            <div style="margin-top:12px">
-              <div class="muted-sm">Resale Options</div>
-              <div style="display:flex;gap:8px;margin-top:8px">
-                <button class="btn btn-ghost" onclick="openResale('company')">Resell to Company</button>
-                <button class="btn btn-primary" onclick="openResale('traveler')">Resell to Traveler</button>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px" class="card">
-            <div style="font-weight:700;color:#fff">How resale works (demo)</div>
-            <div class="muted-sm" style="margin-top:8px">You can choose to sell your seat back to the transportation company (instant partial refund) or sell to another traveler (quick sale with possible small markup). We show an estimated value in the next step.</div>
-          </div>
+        <div class="price-card">
+          <div class="price-title">Business</div>
+          <div class="price-amount">₦9,000</div>
+          <p class="price-desc">For professionals and frequent travelers who value comfort and time.</p>
+          <button class="btn btn-primary">Buy Ticket</button>
         </div>
       </div>
     </section>
 
-    <!-- Why Akili -->
-    <section id="about" style="margin-top:26px">
-      <div class="card">
-        <h2 style="color:#fff;margin:0 0 8px">Why Akili</h2>
-        <p class="muted-sm">A research-driven product for a real pain: intercity travel in Africa is often unpredictable, expensive, and frustrating for both travelers and transport operators.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px">
-          <div class="feature">
-            <div style="font-weight:800;color:#fff;font-size:20px">60%+</div>
-            <div class="muted-sm" style="margin-top:8px">of tickets in many markets are still sold manually (paper) — this causes revenue leakage and long lines.</div>
-          </div>
-          <div class="feature">
-            <div style="font-weight:800;color:#fff;font-size:20px">Up to 30%</div>
-            <div class="muted-sm" style="margin-top:8px">revenue lost by some operators due to outdated ticketing & no manifest control (reported in sector studies).</div>
-          </div>
-          <div class="feature">
-            <div style="font-weight:800;color:#fff;font-size:20px">Flexible</div>
-            <div class="muted-sm" style="margin-top:8px">resale & refund options reduce passenger losses and increase seat utilization.</div>
-          </div>
-        </div>
-
-        <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div>
-            <h4 style="color:#fff;margin:0 0 8px">How Akili helps travelers</h4>
-            <ul class="muted-sm">
-              <li>Book easily from home</li>
-              <li>Track arrival & departure times</li>
-              <li>Resell tickets securely</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="color:#fff;margin:0 0 8px">How Akili helps transport companies</h4>
-            <ul class="muted-sm">
-              <li>Digital ticketing & manifests</li>
-              <li>Better fleet visibility</li>
-              <li>Recover revenue via resale liquidity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <!-- About -->
+    <section id="about" class="card" style="margin-top:80px">
+      <h2 style="color:#fff">About Akili</h2>
+      <p style="color:#9aa6b2;font-size:15px;line-height:1.6">
+        Akili is designed to make travel in Africa simpler, smarter, and more flexible. 
+        Our goal is to reduce wasted seats, empower travelers, and give transport companies new tools to grow.
+      </p>
     </section>
 
     <!-- Contact -->
-    <section id="contact" style="margin-top:18px">
-      <div class="card" style="padding:20px">
-        <h3 style="color:#fff;margin:0 0 10px">Contact & Support</h3>
-        <p class="muted-sm">WhatsApp: <a style="color:var(--accent);text-decoration:none" href="https://wa.me/2348084972354">+234 808 497 2354</a> • Email: <a style="color:var(--accent);text-decoration:none" href="mailto:info@akili.com">info@akili.com</a></p>
-
-        <div style="margin-top:12px;display:flex;gap:12px">
-          <input id="contactName" placeholder="Your name" style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)">
-          <input id="contactEmail" placeholder="Your email" style="width:320px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)">
-        </div>
-        <textarea id="contactMessage" placeholder="Message" style="width:100%;margin-top:12px;padding:12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted)"></textarea>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn btn-primary" onclick="sendContact()">Send Message</button>
-          <button class="btn btn-ghost" onclick="window.location.href='mailto:info@akili.com'">Email Directly</button>
-        </div>
-      </div>
+    <section id="contact" class="card" style="margin-top:80px;padding:40px">
+      <h3 style="color:#fff;margin-bottom:12px">Contact & Support</h3>
+      <p style="color:#9aa6b2">
+        WhatsApp: <a href="https://wa.me/2348084972354" style="color:var(--accent)">+234 808 497 2354</a> • 
+        Email: <a href="mailto:info@akili.com" style="color:var(--accent)">info@akili.com</a>
+      </p>
     </section>
 
     <footer>
-      <div style="max-width:1100px;margin:0 auto">
-        <div style="display:flex;justify-content:center;gap:12px;margin-bottom:10px">
-          <a href="#" style="color:var(--muted)">Facebook</a>
-          <a href="#" style="color:var(--muted)">Instagram</a>
-          <a href="#" style="color:var(--muted)">X</a>
-          <a href="#" style="color:var(--muted)">TikTok</a>
-          <a href="#" style="color:var(--muted)">LinkedIn</a>
-        </div>
-        <div style="color:#9aa6b2">© 2025 Akili. All rights reserved.</div>
-      </div>
+      <div style="color:#9aa6b2">© 2025 Akili. All rights reserved.</div>
     </footer>
   </main>
-
-  <!-- Resale Modal (hidden by default) -->
-  <div id="resaleModal" class="modal" style="display:none">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:800;color:#fff">Resell Ticket</div>
-        <div style="cursor:pointer;color:#9aa6b2" onclick="closeResale()">✕</div>
-      </div>
-      <div style="margin-top:12px" id="resaleBody">
-        <div class="muted-sm">Choose how you want to resell your ticket</div>
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn btn-ghost" onclick="simulateResale('company')">Resell to Company (Partial refund)</button>
-          <button class="btn btn-primary" onclick="simulateResale('traveler')">Resell to Traveler (Quick sale)</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Basic simulated behaviors
-    function joinWait(){
-      const email = document.getElementById('waitEmail').value || 'you@youremail.com';
-      alert('Thanks! We added ' + email + ' to Akili early access waitlist.');
-    }
-
-    function searchBuses(){
-      document.getElementById('searchResults').style.display='block';
-      // simulate countdown
-      startCountdown(12);
-    }
-
-    // Simulate live tracking countdown & feed
-    let countdownInterval = null;
-    function startCountdown(mins){
-      document.getElementById('busStatus').innerText = 'Arriving in ' + mins + ' mins';
-      const progress = document.getElementById('progressBar');
-      let pct = 10;
-      if(countdownInterval) clearInterval(countdownInterval);
-      countdownInterval = setInterval(()=>{
-        if(pct >= 100){ clearInterval(countdownInterval); document.getElementById('busStatus').innerText='Arrived'; document.getElementById('liveFeed').innerText='Bus has arrived at the terminal.'; }
-        else { pct += 6; progress.style.width = pct + '%'; document.getElementById('eta').innerText = Math.max(0, Math.round((100-pct)/6)) + ' mins'; document.getElementById('liveFeed').innerText = 'Bus is en route — next stop in 8km.'; document.getElementById('progressBar2').style.width = Math.min(100,(pct+22)) + '%'; }
-      }, 1200);
-    }
-
-    function openResale(mode){
-      document.getElementById('resaleModal').style.display='flex';
-      const body = document.getElementById('resaleBody');
-      if(mode === 'company') {
-        body.innerHTML = '<div class="muted-sm">Resell to transportation company — you will receive an instant partial refund (example: ~70% of ticket value). This is quick and guaranteed.</div><div style="margin-top:12px" class="row"><button class="btn btn-primary" onclick="simulateResale(\\'company\\')">Confirm resell to company</button><button class="btn btn-ghost" onclick="closeResale()">Cancel</button></div>';
-      } else if(mode === 'traveler') {
-        body.innerHTML = '<div class="muted-sm">Resell directly to another traveler — price may be similar or slightly higher (demo cap +10%). The sale completes when a buyer accepts.</div><div style="margin-top:12px" class="row"><button class="btn btn-primary" onclick="simulateResale(\\'traveler\\')">List seat for quick sale</button><button class="btn btn-ghost" onclick="closeResale()">Cancel</button></div>';
-      } else {
-        body.innerHTML = '<div class="muted-sm">Choose how you want to resell your ticket</div><div style="margin-top:12px" class="row"><button class="btn btn-ghost" onclick="simulateResale(\\'company\\')">Resell to Company</button><button class="btn btn-primary" onclick="simulateResale(\\'traveler\\')">Resell to Traveler</button></div>';
-      }
-    }
-    function closeResale(){ document.getElementById('resaleModal').style.display='none' }
-
-    function simulateResale(type){
-      if(type==='company'){
-        alert('Demo: Ticket resold to company. You will receive a partial refund (example shown: 70% of ticket value).');
-      } else {
-        alert('Demo: Ticket listed for sale to other travelers. Potential to sell at up to +10% in urgent cases.');
-      }
-      closeResale();
-    }
-
-    function bookNow(){
-      alert('Demo: Seat reserved. (In a live product you would complete payment here — integrate payments like Flutterwave/Paystack).');
-    }
-
-    function sendContact(){
-      const name = document.getElementById('contactName').value || 'Guest';
-      alert('Thanks ' + name + '! Your message has been received. We will contact you via info@akili.com.');
-    }
-  </script>
 </body>
 </html>
-
